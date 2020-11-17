@@ -4,12 +4,12 @@ MAINTAINER Di Zhang
 WORKDIR /src/seqspark
 
 RUN apt-get update \
- && apt-get install -y \
-    curl \
-    unzip \
-    openjdk-8-jdk \
- && apt-get clean \
- && rm -rf /var/lib/apt/lists/*
+  && apt-get install -y \
+  curl \
+  unzip \
+  openjdk-8-jdk \
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/*
 
 ENV SBT_VERSION 1.3.2
 RUN \
@@ -28,8 +28,8 @@ RUN curl -sL --retry 3 \
   "https://archive.apache.org/dist/spark/spark-${SPARK_VERSION}/${SPARK_PACKAGE}.tgz" \
   | gunzip \
   | tar x -C /opt/ \
- && mv /opt/$SPARK_PACKAGE $SPARK_HOME \
- && chown -R root:root $SPARK_HOME
+  && mv /opt/$SPARK_PACKAGE $SPARK_HOME \
+  && chown -R root:root $SPARK_HOME
 
 # add current dir
 ADD . .
@@ -55,7 +55,7 @@ ENV PATH $PATH:${SPARK_HOME}/bin
 ENV PATH $PATH:${SEQSPARK_HOME}/bin
 
 RUN adduser -Ds /bin/bash seqspark
-USER seqspark
+#USER seqspark
 WORKDIR /home/seqspark
 
 ENTRYPOINT ["seqspark"]
